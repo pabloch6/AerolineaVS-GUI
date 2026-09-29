@@ -1,24 +1,19 @@
 package com.aerolineavs.tarifas;
 
 /**
- * Motor de reglas para determinar la tarifa más adecuada.
+ * Business rules for selecting the most suitable fare.
  */
-public final class EvaluadorTarifas {
+public final class PricingServiceImpl implements IPricingService {
 
     private static final String SUPOSICIONES = "Suposiciones: curso universitario = 9 desplazamientos/año; "
             + "la frecuencia anual informada representa los viajes relevantes de cada regla; "
             + "si no se cumple ninguna condición exacta, no se oferta tarifa.";
 
-    private EvaluadorTarifas() {
-    }
-
     /**
-     * Evalúa una única tarifa aplicable en función de los datos del cliente.
-     *
-     * @param cliente datos del cliente
-     * @return tarifa resultante junto con suposiciones
+     * {@inheritDoc}
      */
-    public static ResultadoTarifa evaluar(ClientePotencial cliente) {
+    @Override
+    public ResultadoTarifa evaluar(ClientePotencial cliente) {
         if (cliente.edad() < 18
                 && cliente.tipoViajero() == TipoViajero.MENOR
                 && cliente.vuelosAnuales() >= 6) {
