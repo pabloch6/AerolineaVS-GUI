@@ -16,6 +16,7 @@ public final class App {
      * @param args argumentos no usados
      */
     public static void main(String[] args) {
+        IPricingService pricingService = new PricingServiceImpl();
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("=== Evaluador de Tarifas Aerolínea ===");
 
@@ -47,7 +48,7 @@ public final class App {
                     edad, vuelos, tipo, clase, destino, ingresos, conNinos, viveConPadres
             );
 
-            ResultadoTarifa resultado = EvaluadorTarifas.evaluar(cliente);
+            ResultadoTarifa resultado = pricingService.evaluar(cliente);
 
             System.out.println("Tarifa recomendada: " + resultado.tarifa().getNombre());
             System.out.println("Descuento: " + resultado.tarifa().getDescuentoPorcentaje() + "%");
